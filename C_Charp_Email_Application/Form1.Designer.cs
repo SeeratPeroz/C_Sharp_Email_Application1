@@ -36,9 +36,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtRecipientEmail = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rtbBody = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rtbBody = new System.Windows.Forms.TextBox();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -117,15 +117,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Body";
             // 
-            // rtbBody
-            // 
-            this.rtbBody.Location = new System.Drawing.Point(6, 19);
-            this.rtbBody.Name = "rtbBody";
-            this.rtbBody.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtbBody.Size = new System.Drawing.Size(567, 391);
-            this.rtbBody.TabIndex = 1;
-            this.rtbBody.Text = "";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label7);
@@ -154,6 +145,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Recipient Details";
             // 
+            // rtbBody
+            // 
+            this.rtbBody.Location = new System.Drawing.Point(30, 41);
+            this.rtbBody.Multiline = true;
+            this.rtbBody.Name = "rtbBody";
+            this.rtbBody.Size = new System.Drawing.Size(532, 361);
+            this.rtbBody.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -169,6 +168,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -186,10 +186,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtRecipientEmail;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RichTextBox rtbBody;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtSubject;
+        private System.Windows.Forms.TextBox rtbBody;
     }
 }
 

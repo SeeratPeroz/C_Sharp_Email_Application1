@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,8 +40,15 @@ namespace C_Charp_Email_Application
                 MessageBox.Show(ex.Message);
             }
         }
+        //Thread t = new Thread(new ThreadStart(ThreadProc));
 
         private void btnSend_Click_1(object sender, EventArgs e)
+        {
+            sendEmail();
+
+        }
+
+        void sendEmail()
         {
             try
             {
@@ -52,39 +61,45 @@ namespace C_Charp_Email_Application
                 clientDetails.EnableSsl = true;
                 clientDetails.DeliveryMethod = SmtpDeliveryMethod.Network;
                 clientDetails.UseDefaultCredentials = false;
-                clientDetails.Credentials = new NetworkCredential("your gmail", "your password");
+                clientDetails.Credentials = new NetworkCredential("your gmail account", "your gmail pass");
 
-                //Message Details
-                //sdfasdf
-              
-                MailMessage mailDetails = new MailMessage();
-                mailDetails.From = new MailAddress("your gmail");
-                mailDetails.To.Add(txtRecipientEmail.Text.Trim());
-                //for multiple recipients
-                //mailDetails.To.Add("another recipient email address");
-                //for bcc
-                //mailDetails.Bcc.Add("bcc email address")
-                mailDetails.Subject = txtSubject.Text.Trim();
-                mailDetails.Body = rtbBody.Text.Trim();
-
-
-                //file attachment
-                if (fileName.Length > 0)
+                Thread t = new Thread(delegate()
                 {
-                    Attachment attachment = new Attachment(fileName);
-                    mailDetails.Attachments.Add(attachment);
-                }
+                    //Message Details
+                    MailMessage mailDetails = new MailMessage();
+                    mailDetails.From = new MailAddress("your gmail account");
+                    mailDetails.To.Add(txtRecipientEmail.Text.Trim());
 
-                clientDetails.Send(mailDetails);
-                MessageBox.Show("Your mail has been sent.");
-                fileName = "";
+                    mailDetails.Subject = txtSubject.Text.Trim();
+                    mailDetails.IsBodyHtml = false;
+                    mailDetails.Body = rtbBody.Text.Trim();
+
+
+                    //file attachment
+                    if (fileName.Length > 0)
+                    {
+                        Attachment attachment = new Attachment(fileName);
+                        mailDetails.Attachments.Add(attachment);
+                    }
+
+                    clientDetails.Send(mailDetails);
+                    MessageBox.Show("Your mail has been sent.");
+
+                    fileName = "";
+                    
+
+
+                });
+
+                t.Start();
+                txtSubject.Clear();
+                rtbBody.Clear();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-       
     }
 }
